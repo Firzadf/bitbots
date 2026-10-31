@@ -24,14 +24,14 @@ export default function Header() {
     return () => listener.subscription.unsubscribe();
   }, []);
 
-  async function login() {
+  async function login(provider: "twitter" | "github") {
     if (!hasSupabaseEnv()) {
       alert("Supabase is not set up yet. Fill in .env.local first, see README.md.");
       return;
     }
     const supabase = createClient();
     await supabase.auth.signInWithOAuth({
-      provider: "twitter",
+      provider,
       options: { redirectTo: `${window.location.origin}/auth/callback` },
     });
   }
@@ -64,9 +64,14 @@ export default function Header() {
               </button>
             </>
           ) : (
-            <button onClick={login} className="btn-neon px-3 py-2 text-sm">
-              Log in with X
-            </button>
+            <>
+              <button onClick={() => login("github")} className="btn-neon px-3 py-2 text-sm">
+                Log in with GitHub
+              </button>
+              <button onClick={() => login("twitter")} className="btn-ghost px-3 py-2 text-sm">
+                Log in with X
+              </button>
+            </>
           )}
         </div>
       </div>
