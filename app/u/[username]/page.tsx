@@ -45,7 +45,7 @@ export default async function UserProfile({ params }: { params: { username: stri
       <div>
         <EnvNotice />
         <h1 className="font-pixel text-lg text-neon">@{params.username}</h1>
-        <p className="mt-3 text-gray-400">Profil tidak bisa dimuat tanpa Supabase.</p>
+        <p className="mt-3 text-gray-400">Profile cannot be loaded without Supabase.</p>
       </div>
     );
   }
@@ -53,9 +53,9 @@ export default async function UserProfile({ params }: { params: { username: stri
   if (!profile) {
     return (
       <div>
-        <h1 className="font-pixel text-lg text-neon">User tidak ditemukan</h1>
+        <h1 className="font-pixel text-lg text-neon">User not found</h1>
         <p className="mt-3 text-gray-400">
-          Username @{params.username} tidak ada. Periksa ejaan username.
+          Username @{params.username} does not exist. Check the username spelling.
         </p>
       </div>
     );
@@ -66,22 +66,22 @@ export default async function UserProfile({ params }: { params: { username: stri
       <h1 className="font-pixel text-lg md:text-2xl text-neon">@{profile.username}</h1>
       <p className="mt-3 text-gray-300">
         {profile.display_name ? `${profile.display_name} - ` : ""}
-        {nfts.length} BitBots dimiliki.
+        {nfts.length} BitBots owned.
       </p>
       {balance !== null && (
-        <p className="mt-2 text-gold">Saldo kamu: {formatBits(balance)} BITS</p>
+        <p className="mt-2 text-gold">Your balance: {formatBits(balance)} BITS</p>
       )}
       {profile.free_mint_quota !== null && (
         <p className="mt-1 text-sm text-gray-400">
-          Kuota free mint tersisa: {profile.free_mint_quota}
+          Remaining free mint quota: {profile.free_mint_quota}
         </p>
       )}
 
       <section className="mt-8">
-        <h2 className="font-pixel text-sm text-cyanx mb-4">Galeri</h2>
+        <h2 className="font-pixel text-sm text-cyanx mb-4">Gallery</h2>
         {nfts.length === 0 ? (
           <p className="text-gray-400">
-            User ini belum memiliki BitBots. Mint dari halaman utama.
+            This user does not own any BitBots yet. Mint from the home page.
           </p>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

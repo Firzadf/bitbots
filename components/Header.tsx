@@ -26,7 +26,7 @@ export default function Header() {
 
   async function login() {
     if (!hasSupabaseEnv()) {
-      alert("Supabase belum diset. Isi .env.local dulu, lihat README.md.");
+      alert("Supabase is not set up yet. Fill in .env.local first, see README.md.");
       return;
     }
     const supabase = createClient();
@@ -48,7 +48,7 @@ export default function Header() {
         <Link href="/" className="font-pixel text-sm text-neon">
           BITBOTS
         </Link>
-        <nav aria-label="Navigasi utama" className="flex gap-4 text-sm flex-wrap">
+        <nav aria-label="Main navigation" className="flex gap-4 text-sm flex-wrap">
           <Link href="/explore" className="hover:text-neon">Explore</Link>
           <Link href="/market" className="hover:text-neon">Market</Link>
           <Link href="/leaderboard" className="hover:text-neon">Leaderboard</Link>
@@ -65,7 +65,7 @@ export default function Header() {
             </>
           ) : (
             <button onClick={login} className="btn-neon px-3 py-2 text-sm">
-              Login dengan X
+              Log in with X
             </button>
           )}
         </div>

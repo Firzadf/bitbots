@@ -12,10 +12,10 @@ export default function TransferForm({ nftId }: { nftId: string }) {
     e.preventDefault();
     const target = username.trim();
     if (!/^[A-Za-z0-9_]{3,32}$/.test(target)) {
-      setMessage("Username tujuan tidak valid. Gunakan 3 sampai 32 karakter huruf, angka, atau garis bawah.");
+      setMessage("Target username is not valid. Use 3 to 32 letters, numbers, or underscores.");
       return;
     }
-    if (!window.confirm(`Transfer NFT ini ke @${target}? Aksi ini tidak bisa dibatalkan dari halaman ini.`)) {
+    if (!window.confirm(`Transfer this NFT to @${target}? This action cannot be undone from this page.`)) {
       return;
     }
     setBusy(true);
@@ -26,9 +26,9 @@ export default function TransferForm({ nftId }: { nftId: string }) {
       p_to_username: username.trim(),
     });
     setBusy(false);
-    if (error) setMessage(`Transfer gagal: ${error.message}`);
+    if (error) setMessage(`Transfer failed: ${error.message}`);
     else {
-      setMessage("Transfer berhasil.");
+      setMessage("Transfer succeeded.");
       window.location.reload();
     }
   }
@@ -40,8 +40,8 @@ export default function TransferForm({ nftId }: { nftId: string }) {
         <input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="username tujuan (tanpa @)"
-          aria-label="Username tujuan transfer"
+          placeholder="target username (without @)"
+          aria-label="Transfer target username"
           className="input-pixel"
         />
         <button disabled={busy} className="btn-ghost px-4">

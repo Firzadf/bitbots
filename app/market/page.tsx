@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Market BitBots",
-  description: "Beli dan jual BitBots dengan saldo BITS. Fee market 2,5 persen ke treasury.",
+  description: "Buy and sell BitBots with a BITS balance. A 2.5 percent market fee goes to the treasury.",
 };
 
 export default async function Market() {
@@ -58,18 +58,18 @@ export default async function Market() {
       {!hasEnv && <EnvNotice />}
       <h1 className="font-pixel text-lg md:text-2xl text-neon">Market</h1>
       <p className="mt-3 text-gray-300">
-        Beli BitBots dengan saldo BITS. Penjual menerima 97,5 persen harga,
-        fee 2,5 persen masuk ke treasury. Saldo tidak pernah diubah dari client.
+        Buy BitBots with your BITS balance. Sellers receive 97.5 percent of the price,
+        and a 2.5 percent fee goes to the treasury. Balances are never changed from the client.
       </p>
 
       <section className="mt-8">
         <h2 className="font-pixel text-sm text-cyanx mb-4">
-          Listing aktif: {listings.length}
+          Active listings: {listings.length}
         </h2>
         {listings.length === 0 ? (
           <p className="text-gray-400">
-            Belum ada listing aktif. Pemilik NFT bisa membuat listing dari
-            halaman detail NFT.
+            No active listings yet. NFT owners can create a listing from
+            the NFT detail page.
           </p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -82,10 +82,10 @@ export default async function Market() {
                 <div key={listing.id} className="card p-3">
                   <NftCard nft={nft} price={listing.price_bits} />
                   <p className="text-sm mt-3">
-                    Penjual: {seller ? `@${seller.username}` : "tidak diketahui"}
+                    Seller: {seller ? `@${seller.username}` : "unknown"}
                   </p>
                   <p className="text-sm text-gold mt-1">
-                    Harga: {formatBits(listing.price_bits)} BITS
+                    Price: {formatBits(listing.price_bits)} BITS
                   </p>
                   <div className="flex gap-2 mt-3">
                     {!isSeller && <BuyButton listingId={listing.id} />}
@@ -93,7 +93,7 @@ export default async function Market() {
                   </div>
                   {!viewerId && (
                     <p className="text-xs text-gray-500 mt-2">
-                      Login dengan X untuk membeli.
+                      Log in with X to buy.
                     </p>
                   )}
                 </div>

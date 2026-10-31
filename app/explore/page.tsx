@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Explore BitBots",
-  description: "Jelajahi BitBots yang sudah dimint, filter berdasarkan trait dan rarity.",
+  description: "Browse minted BitBots, filtered by trait and rarity.",
 };
 
 interface SearchParams {
@@ -53,14 +53,14 @@ export default async function Explore({ searchParams }: { searchParams: SearchPa
       {!hasEnv && <EnvNotice />}
       <h1 className="font-pixel text-lg md:text-2xl text-neon">Explore BitBots</h1>
       <p className="mt-3 text-gray-300">
-        Semua BitBots yang sudah dimint. Filter berdasarkan rarity dan trait.
+        All minted BitBots. Filter by rarity and trait.
       </p>
 
       <form method="get" className="card p-4 mt-6 flex flex-wrap gap-3 items-end">
         <div>
           <label htmlFor="rarity" className="block text-sm mb-1">Rarity</label>
           <select id="rarity" name="rarity" defaultValue={rarity} className="input-pixel">
-            <option value="">Semua rarity</option>
+            <option value="">All rarities</option>
             <option value="Common">Common</option>
             <option value="Rare">Rare</option>
             <option value="Epic">Epic</option>
@@ -68,18 +68,18 @@ export default async function Explore({ searchParams }: { searchParams: SearchPa
           </select>
         </div>
         <div>
-          <label htmlFor="layer" className="block text-sm mb-1">Layer trait</label>
+          <label htmlFor="layer" className="block text-sm mb-1">Trait layer</label>
           <select id="layer" name="layer" defaultValue={layer} className="input-pixel">
-            <option value="">Semua layer</option>
+            <option value="">All layers</option>
             {PIXEL_LAYERS.map((l) => (
               <option key={l} value={l}>{l}</option>
             ))}
           </select>
         </div>
         <div>
-          <label htmlFor="variant" className="block text-sm mb-1">Varian trait</label>
+          <label htmlFor="variant" className="block text-sm mb-1">Trait variant</label>
           <select id="variant" name="variant" defaultValue={variant} className="input-pixel">
-            <option value="">Semua varian</option>
+            <option value="">All variants</option>
             {variantOptions.map((t) => (
               <option key={t.variant} value={t.variant}>
                 {t.name} ({t.tier})
@@ -91,17 +91,17 @@ export default async function Explore({ searchParams }: { searchParams: SearchPa
         <a href="/explore" className="btn-ghost px-4 py-2 text-sm">Reset</a>
       </form>
       <p className="text-xs text-gray-500 mt-3">
-        Pilih layer dulu untuk melihat daftar variannya. Filter varian bekerja
-        persis pada nama varian di database.
+        Pick a layer first to see its variants. The variant filter matches
+        the variant name in the database exactly.
       </p>
 
       <section className="mt-8">
         <h2 className="font-pixel text-sm text-cyanx mb-4">
-          Hasil: {filtered.length} BitBots
+          Results: {filtered.length} BitBots
         </h2>
         {filtered.length === 0 ? (
           <p className="text-gray-400">
-            Belum ada NFT yang cocok. Ubah filter, atau mint dari halaman utama.
+            No matching NFTs yet. Change the filters, or mint from the home page.
           </p>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

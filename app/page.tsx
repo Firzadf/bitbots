@@ -38,12 +38,12 @@ export default async function Home() {
       {!hasEnv && <EnvNotice />}
       <section>
         <h1 className="font-pixel text-lg md:text-2xl leading-relaxed text-neon">
-          Robot pixel yang bisa kamu mint, kumpulkan, dan jual.
+          Pixel robots you can mint, collect, and sell.
         </h1>
         <p className="mt-4 max-w-2xl text-gray-300">
-          BitBots adalah koleksi 1.000 robot pixel art 32x32. Kepemilikan
-          dicatat di database, tanpa smart contract. Setiap user baru mendapat
-          100 BITS demo dan 3 free mint awal.
+          BitBots is a collection of 1,000 32x32 pixel art robots. Ownership
+          is recorded in the database, with no smart contract. Every new user
+          gets 100 demo BITS and 3 initial free mints.
         </p>
         <div className="mt-6 flex flex-wrap gap-6 items-start">
           <MintButton />
@@ -53,16 +53,16 @@ export default async function Home() {
         </div>
         {hasEnv && (
           <p className="mt-6 text-sm text-gray-400">
-            Sudah dimint: {mintedCount} dari {totalCount} BitBots.
+            Minted: {mintedCount} of {totalCount} BitBots.
           </p>
         )}
       </section>
 
       <section className="mt-12">
-        <h2 className="font-pixel text-sm text-cyanx mb-4">Mint terbaru</h2>
+        <h2 className="font-pixel text-sm text-cyanx mb-4">Latest mints</h2>
         {latest.length === 0 ? (
           <p className="text-gray-400">
-            Belum ada NFT yang dimint. Login dengan X, lalu tekan Mint Gratis.
+            No NFTs have been minted yet. Log in with X, then press Free Mint.
           </p>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -74,11 +74,11 @@ export default async function Home() {
       </section>
 
       <section className="mt-12">
-        <h2 className="font-pixel text-sm text-cyanx mb-4">Cara main</h2>
+        <h2 className="font-pixel text-sm text-cyanx mb-4">How to play</h2>
         <ol className="list-decimal ml-5 space-y-2 text-gray-300">
-          <li>Login dengan X. Profil dan saldo 100 BITS dibuat otomatis.</li>
-          <li>Tekan Mint Gratis untuk mendapat satu BitBot acak.</li>
-          <li>Lihat koleksimu di halaman profil, transfer, atau jual di Market.</li>
+          <li>Log in with X. Your profile and 100 BITS balance are created automatically.</li>
+          <li>Press Free Mint to get one random BitBot.</li>
+          <li>View your collection on your profile page, transfer it, or sell it on the Market.</li>
         </ol>
       </section>
     </div>

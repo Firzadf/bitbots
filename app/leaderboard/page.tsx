@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Leaderboard BitBots",
-  description: "Holder BitBots terbanyak dan NFT BitBots paling langka.",
+  description: "Top BitBots holders and the rarest BitBots NFTs.",
 };
 
 export default async function Leaderboard() {
@@ -57,10 +57,10 @@ export default async function Leaderboard() {
       <h1 className="font-pixel text-lg md:text-2xl text-neon">Leaderboard</h1>
 
       <section className="mt-8">
-        <h2 className="font-pixel text-sm text-cyanx mb-4">Holder terbanyak</h2>
+        <h2 className="font-pixel text-sm text-cyanx mb-4">Top holders</h2>
         {holders.length === 0 ? (
           <p className="text-gray-400">
-            Belum ada holder. Mint pertama akan muncul di sini.
+            No holders yet. The first mint will appear here.
           </p>
         ) : (
           <ol className="space-y-2">
@@ -71,7 +71,7 @@ export default async function Leaderboard() {
                     @{h.profile.username}
                   </Link>
                 ) : (
-                  <span>Tidak diketahui</span>
+                  <span>Unknown</span>
                 )}
                 <span>{h.count} NFT</span>
               </li>
@@ -81,9 +81,9 @@ export default async function Leaderboard() {
       </section>
 
       <section className="mt-12">
-        <h2 className="font-pixel text-sm text-cyanx mb-4">NFT paling langka</h2>
+        <h2 className="font-pixel text-sm text-cyanx mb-4">Rarest NFTs</h2>
         {rarest.length === 0 ? (
-          <p className="text-gray-400">Belum ada NFT yang dimint.</p>
+          <p className="text-gray-400">No NFTs have been minted yet.</p>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {rarest.map((nft) => (

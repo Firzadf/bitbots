@@ -30,7 +30,7 @@ export default function NftCard({ nft, price }: { nft: NftRow; price?: number })
         <p className="text-sm text-gold mt-1">{formatBits(price)} BITS</p>
       )}
       <p className="text-xs mt-1">
-        {nft.is_minted ? "Minted" : "Belum dimint"}
+        {nft.is_minted ? "Minted" : "Not minted yet"}
       </p>
     </Link>
   );

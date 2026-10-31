@@ -110,24 +110,24 @@ export default async function NftDetail({ params }: { params: { id: string } }) 
         }
       }
       const nameOf = (id: string | null): string => {
-        if (!id) return "sistem";
-        return profilesById.get(id)?.username ? `@${profilesById.get(id)?.username}` : "tidak diketahui";
+        if (!id) return "system";
+        return profilesById.get(id)?.username ? `@${profilesById.get(id)?.username}` : "unknown";
       };
 
       const items: HistoryItem[] = [];
       for (const t of transfers) {
         items.push({
           key: `t-${t.id}`,
-          label: t.type === "mint" ? "Mint" : t.type === "sale" ? "Penjualan" : "Transfer",
-          detail: `${nameOf(t.from_id)} ke ${nameOf(t.to_id)}`,
+          label: t.type === "mint" ? "Mint" : t.type === "sale" ? "Sale" : "Transfer",
+          detail: `${nameOf(t.from_id)} to ${nameOf(t.to_id)}`,
           createdAt: t.created_at ?? "",
         });
       }
       for (const s of sales) {
         items.push({
           key: `s-${s.id}`,
-          label: "Penjualan",
-          detail: `${nameOf(s.seller_id)} ke ${nameOf(s.buyer_id)} seharga ${formatBits(s.price_bits)} BITS`,
+          label: "Sale",
+          detail: `${nameOf(s.seller_id)} to ${nameOf(s.buyer_id)} for ${formatBits(s.price_bits)} BITS`,
           createdAt: s.created_at ?? "",
         });
       }
@@ -139,8 +139,8 @@ export default async function NftDetail({ params }: { params: { id: string } }) 
     return (
       <div>
         <EnvNotice />
-        <h1 className="font-pixel text-lg text-neon">Detail NFT</h1>
-        <p className="mt-3 text-gray-400">Detail tidak bisa dimuat tanpa Supabase.</p>
+        <h1 className="font-pixel text-lg text-neon">NFT detail</h1>
+        <p className="mt-3 text-gray-400">Detail cannot be loaded without Supabase.</p>
       </div>
     );
   }
@@ -148,8 +148,8 @@ export default async function NftDetail({ params }: { params: { id: string } }) 
   if (!nft) {
     return (
       <div>
-        <h1 className="font-pixel text-lg text-neon">NFT tidak ditemukan</h1>
-        <p className="mt-3 text-gray-400">Periksa kembali ID NFT.</p>
+        <h1 className="font-pixel text-lg text-neon">NFT not found</h1>
+        <p className="mt-3 text-gray-400">Check the NFT ID again.</p>
       </div>
     );
   }
@@ -160,7 +160,7 @@ export default async function NftDetail({ params }: { params: { id: string } }) 
     <div>
       <h1 className="font-pixel text-lg md:text-2xl text-neon">{nft.name}</h1>
       <p className="mt-3 text-gray-300">
-        #{nft.token_number} - {nft.rarity_tier ?? "-"} - Skor {nft.rarity_score ?? "-"}
+        #{nft.token_number} - {nft.rarity_tier ?? "-"} - Score {nft.rarity_score ?? "-"}
       </p>
 
       <div className="grid md:grid-cols-2 gap-6 mt-6">
@@ -176,14 +176,14 @@ export default async function NftDetail({ params }: { params: { id: string } }) 
             />
           ) : (
             <div className="w-full aspect-square bg-black border-2 border-[#2a2a4a] flex items-center justify-center text-gray-500">
-              Gambar belum tersedia
+              Image not available
             </div>
           )}
         </div>
 
         <div className="space-y-4">
           <section className="card p-4">
-            <h2 className="font-pixel text-[10px] text-cyanx mb-3">Pemilik</h2>
+            <h2 className="font-pixel text-[10px] text-cyanx mb-3">Owner</h2>
             {owner ? (
               <p>
                 <Link href={`/u/${owner.username}`} className="hover:text-neon">
@@ -191,12 +191,12 @@ export default async function NftDetail({ params }: { params: { id: string } }) 
                 </Link>
               </p>
             ) : (
-              <p className="text-gray-400">Belum dimiliki siapa pun.</p>
+              <p className="text-gray-400">Not owned by anyone yet.</p>
             )}
-            <p className="text-sm mt-2">{nft.is_minted ? "Sudah dimint" : "Belum dimint"}</p>
+            <p className="text-sm mt-2">{nft.is_minted ? "Already minted" : "Not minted yet"}</p>
             {activeListing && (
               <p className="text-gold mt-2">
-                Dijual: {formatBits(activeListing.price_bits)} BITS
+                Listed for: {formatBits(activeListing.price_bits)} BITS
               </p>
             )}
           </section>
@@ -204,7 +204,7 @@ export default async function NftDetail({ params }: { params: { id: string } }) 
           <section className="card p-4">
             <h2 className="font-pixel text-[10px] text-cyanx mb-3">Traits</h2>
             {traits.length === 0 ? (
-              <p className="text-gray-400 text-sm">Traits belum tercatat.</p>
+              <p className="text-gray-400 text-sm">No traits recorded yet.</p>
             ) : (
               <ul className="space-y-2">
                 {traits.map((t) => (
@@ -231,17 +231,17 @@ export default async function NftDetail({ params }: { params: { id: string } }) 
           )}
           {!isOwner && !activeListing && (
             <p className="text-sm text-gray-500">
-              Hanya pemilik yang bisa transfer atau membuat listing untuk NFT ini.
+              Only the owner can transfer or create a listing for this NFT.
             </p>
           )}
         </div>
       </div>
 
       <section className="mt-10">
-        <h2 className="font-pixel text-sm text-cyanx mb-4">Riwayat pemilik</h2>
+        <h2 className="font-pixel text-sm text-cyanx mb-4">Owner history</h2>
         {history.length === 0 ? (
           <p className="text-gray-400">
-            Belum ada riwayat. NFT ini belum dimint atau riwayat belum tercatat.
+            No history yet. This NFT has not been minted, or its history has not been recorded.
           </p>
         ) : (
           <ul className="space-y-2">

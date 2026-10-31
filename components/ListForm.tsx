@@ -12,7 +12,7 @@ export default function ListForm({ nftId }: { nftId: string }) {
     e.preventDefault();
     const parsed = Number(price);
     if (!Number.isFinite(parsed) || parsed <= 0) {
-      setMessage("Harga harus angka lebih dari 0.");
+      setMessage("Price must be a number greater than 0.");
       return;
     }
     setBusy(true);
@@ -23,25 +23,25 @@ export default function ListForm({ nftId }: { nftId: string }) {
       p_price: Number(price),
     });
     setBusy(false);
-    if (error) setMessage(`Listing gagal: ${error.message}`);
+    if (error) setMessage(`Listing failed: ${error.message}`);
     else {
-      setMessage("Listing berhasil.");
+      setMessage("Listing created.");
       window.location.reload();
     }
   }
 
   return (
     <form onSubmit={onSubmit} className="card p-4">
-      <p className="font-pixel text-[10px] text-gold mb-3">JUAL DI MARKET</p>
+      <p className="font-pixel text-[10px] text-gold mb-3">SELL ON THE MARKET</p>
       <div className="flex gap-2">
         <input
           value={price}
           onChange={(e) => setPrice(e.target.value)}
-          placeholder="Harga BITS, contoh 50"
+          placeholder="BITS price, e.g. 50"
           type="number"
           min="0"
           step="0.01"
-          aria-label="Harga listing dalam BITS"
+          aria-label="Listing price in BITS"
           className="input-pixel"
         />
         <button disabled={busy} className="btn-neon px-4">
@@ -49,7 +49,7 @@ export default function ListForm({ nftId }: { nftId: string }) {
         </button>
       </div>
       {message && <p role="status" className="text-sm mt-3 text-gray-300">{message}</p>}
-      <p className="text-xs mt-2 text-gray-500">Fee market 2,5 persen ke treasury.</p>
+      <p className="text-xs mt-2 text-gray-500">Fee market 2,5 persen to treasury.</p>
     </form>
   );
 }
