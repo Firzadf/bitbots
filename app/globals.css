@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  background: #0a0a12;
+  color: #e8e8f0;
+}
+
+body {
+  background: #0a0a12;
+  color: #e8e8f0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.font-pixel {
+  font-family: "Press Start 2P", monospace;
+  letter-spacing: 0.02em;
+}
+
+.pixel-img {
+  image-rendering: pixelated;
+}
+
+.card {
+  background: #141426;
+  border: 2px solid #2a2a4a;
+  border-radius: 0;
+}
+
+.card:hover {
+  border-color: #00ff9c;
+}
+
+.btn-neon {
+  background: #00ff9c;
+  color: #0a0a12;
+  font-weight: 700;
+  border: 2px solid #00ff9c;
+  box-shadow: 4px 4px 0 0 #ff2ec4;
+}
+
+.btn-neon:disabled {
+  opacity: 0.5;
+  box-shadow: none;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #e8e8f0;
+  border: 2px solid #2a2a4a;
+}
+
+.input-pixel {
+  background: #0a0a12;
+  border: 2px solid #2a2a4a;
+  color: #e8e8f0;
+  padding: 0.6rem 0.75rem;
+  width: 100%;
+}
+
+button,
+a {
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms ease-out;
+}
+
+button:active,
+a:active {
+  transform: scale(0.97);
+}
+
+:focus-visible {
+  outline: 2px solid #00ff9c;
+  outline-offset: 2px;
+}
+
+button,
+.btn-neon,
+.btn-ghost {
+  min-height: 44px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: #00ff9c;
+  color: #0a0a12;
+  padding: 0.75rem 1rem;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
