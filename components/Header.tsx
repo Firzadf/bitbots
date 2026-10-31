@@ -14,14 +14,28 @@ export default function Header() {
       return;
     }
     const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => {
-      setEmail(data.user?.email ?? null);
+    let settled = false;
+    const finish = (userEmail: string | null) => {
+      if (settled) return;
+      settled = true;
+      setEmail(userEmail);
       setLoading(false);
-    });
+    };
+    // Never leave the header stuck on "..." if the auth check hangs:
+    // after 3 seconds, show the login buttons anyway.
+    const timeout = setTimeout(() => finish(null), 3000);
+    supabase.auth
+      .getUser()
+      .then(({ data }) => finish(data.user?.email ?? null))
+      .catch(() => finish(null));
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       setEmail(session?.user?.email ?? null);
+      setLoading(false);
     });
-    return () => listener.subscription.unsubscribe();
+    return () => {
+      clearTimeout(timeout);
+      listener.subscription.unsubscribe();
+    };
   }, []);
 
   async function login(provider: "twitter" | "github") {
